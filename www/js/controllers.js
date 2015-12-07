@@ -30,27 +30,28 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
                 email: user.email,
                 password: user.password
             }).then(function (userData) {
-                alert("User created successfully!");
+                //alert("User created successfully!");
                 ref.child("users").child(userData.uid).set({
                     email: user.email,
                     displayName: user.displayname,
-                    userPts: 0
+                    userPts: 0,
+                    ranking: "Tickle Tease"
                 });
                 $ionicLoading.hide();
                 $scope.modal.hide();
             }).catch(function (error) {
-                alert("Error: " + error);
+                //alert("Error: " + error);
                 $ionicLoading.hide();
             });
         } else
-            alert("Please fill all details");
+           console.log("else"); //alert("Please fill all details");
     }
   $scope.signIn = function (user) {
 
   if (user && user.email && user.pwdForLogin) {
-      $ionicLoading.show({
-          template: 'Signing In...'
-      });
+      // $ionicLoading.show({
+      //     template: 'Signing In...'
+      // });
       auth.$authWithPassword({
           email: user.email,
           password: user.pwdForLogin
@@ -63,21 +64,31 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
               //     $rootScope.displayName = val;
               // });
           });
-          $ionicLoading.hide();
+          //$ionicLoading.hide();
           $state.go('app.playlists');
       }).catch(function (error) {
-          alert("Authentication failed:" + error.message);
+          //alert("Authentication failed:" + error.message);
           $ionicLoading.hide();
       });
   } else
-      alert("Please enter email and password both");
+      console.log("else");//alert("Please enter email and password both");
 }
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+.controller('AccountCtrl', function($scope, $firebaseAuth, UserService) {
+  var user = UserService.getUser();
+  user.$ref().on("value", function(snapshot) {
+    $scope.values = snapshot.val()
+    console.log($scope.values.userPts);
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
+  console.log("in account");
+  //user.$bindTo($scope, "userdata");
+  //user.$ref().set({ userPts : 4 });
+
+  //console.log(authData.score);
+
 })
 
 

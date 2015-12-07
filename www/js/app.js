@@ -9,7 +9,7 @@
 var firebaseUrl = "https://sizzling-heat-1909.firebaseio.com";
 
 
-angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'firebase', 'ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'firebase', 'ngCordova', 'ngIOS9UIWebViewPatch'])
 
 .run(function($ionicPlatform,$rootScope, $location, Auth, $ionicLoading) {
   $ionicPlatform.ready(function() {
@@ -107,7 +107,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'f
       url: '/account',
       views: {
         'menuContent': {
-          templateUrl: 'templates/browse.html',
+          templateUrl: 'templates/account.html',
           controller: 'AccountCtrl'
         }
       }
