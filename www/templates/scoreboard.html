@@ -6,6 +6,7 @@
 		 	<ion-item ng-repeat="winner in scores">
 			 	<a class="item item-avatar" href="#">
 			      <img ng-src="data:image/jpeg;base64,{{winner.avatar}}" width="100%" />
+			      <h2><b>{{winner.position}} </b></h2>
 			      <h2> {{winner.name}} </h2>
 			      <h2> {{winner.score}} </h2>
 			      <div ng-class="{'icon ion-flag' : authUID === winner.id}"></div>
