@@ -12,14 +12,14 @@
             <div class="item item-divider">User</div>
             <div class="item item-body">{{values.displayName}}</div>
         </div>
-        <ion-list style="">
+        <ion-list style="" style="border:none">
             <ion-item style=""> <strong>Points:</strong> {{values.userPts}}</ion-item>
             <ion-item style=""> <strong>Ranking: </strong> {{values.ranking}}</ion-item>
             <ion-item style=""> <strong>All-Time Record: </strong> {{values.record}}</ion-item>
             <ion-item style=""><strong> Current Goal: </strong> {{ values.currentGoal }} </ion-item>
         </ion-list>
         <button ng-click="uploadImage()" class="button button-block icon ion-camera">
-                Upload Image
+                Upload New Image
         </button>
     </ion-content>
 </ion-view>

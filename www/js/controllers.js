@@ -68,7 +68,7 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
               // });
           });
           //$ionicLoading.hide();
-          $state.go('app.account');
+          $state.go('app.stopwatch');
       }).catch(function (error) {
           //alert("Authentication failed:" + error.message);
           $ionicLoading.hide();

@@ -8,27 +8,25 @@
                 <img src="img/full-logo.png" class="logo" style="max-width:60%;margin-left:20%">
             </div>
         </div>
-        <div style="border-radius: 300px/300px; border:solid 5px white; width:300px; height:300px;">
+        <div style="border-radius: 300px/300px; border:solid 5px white; width:300px; height:300px;margin-left:9%">
             <h4 style="text-align:center;color:white;margin-top:40%;font-size:2.5em;font-family:Bebas!important;transform: scaleY(1.6) scaleX(1.5);">
                 {{min}}<sup style="font-size:0.4em;font-family:Bebas!important;vertical-align:super">M</sup><span style="font-size:1.2em;font-family:Segoe!important;transform: scaleY(1.6) scaleX(1.5);margin-left:2px">{{sec}}<sup style="font-size:0.3em;vertical-align:super">S</sup><span style="margin-left:-6px;font-size:0.7em">.<span style="margin-left:2px;font-size:.9em">{{ms}}</span></span></span>
+                <p ng-class="{'completed' : curRecord >= goal}" style="font-size:.3em;color:#da645a;"> <span style="font-family:0.5em;">GOAL:</span> 00m {{ goal }}s .000 </p>
             </h4>
         <div>
-        <div class="list card padding" style="margin-top:50%">
-            <button ng-click="startTimer()" class="button button-block icon ion-ios-stopwatch">
-                Start Timer
+        <div class="list card padding" style="margin-top:45%">
+            <button ng-click="startTimer()" class="button button-block icon ion-ios-time-outline" style="width:32%;font-size:1em;display:inline-block;">
+                Start
             </button>
-            <button ng-click="stopTimer()" class="button button-block icon ion-android-hand">
-                Stop Timer
+            <button ng-click="stopTimer()" class="button button-block icon ion-ios-close-outline" style="width:32%;font-size:1em;display:inline-block;margin-top:0px;margin-left:1px">
+                Stop
             </button>
-            <button ng-click="clearTimer()" class="button button-block icon ion-ios-close">
-                Clear Timer
+            <button ng-click="clearTimer()" class="button button-block icon ion-ios-reload" style="width:32%;font-size:1em;display:inline-block;margin-top:0px;margin-left:1px">
+                Reset
             </button>
-            <button ng-click="submitScore()" class="button button-block icon ion-archive">
-                Submit Time
+            <button ng-click="submitScore()" class="button button-block icon ion-ios-cloud-upload-outline" style="margin-top:-4px;background-color:#151515;border-color:white">
+                Submit
             </button>
-        </div>
-        <div class ="list card padding">
-            
         </div>
         <!-- add a weakling button -->
     </ion-content>
