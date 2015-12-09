@@ -175,6 +175,10 @@ $scope.startTimer = function(){
   }
 };
 
+$scope.min = "00";
+$scope.sec = "00"
+$scope.ms = "000";
+
 $scope.stopTimer = function() {
     timeStopped = new Date();
     $interval.cancel(started);
@@ -186,24 +190,24 @@ $scope.clearTimer = function(){
     stoppedDuration = 0;
     timeBegan = null;
     timeStopped = null;
-    $scope.min = 0;
-    $scope.sec = 0
-    $scope.ms = 0;
+    $scope.min = "00";
+    $scope.sec = "00"
+    $scope.ms = "000";
     $scope.curRecord = 0;
     pressed = false;
 };
 
 clockRunning = function(){
-    var currentTime = new Date();
-    var timeElapsed = new Date(currentTime - timeBegan - stoppedDuration);
-        $scope.min = timeElapsed.getUTCMinutes();
-        $scope.sec = timeElapsed.getUTCSeconds();
-        $scope.ms = timeElapsed.getUTCMilliseconds();
+  var currentTime = new Date();
+  var timeElapsed = new Date(currentTime - timeBegan - stoppedDuration);
+    $scope.min = timeElapsed.getUTCMinutes();
+    $scope.sec = timeElapsed.getUTCSeconds();
+    $scope.ms = timeElapsed.getUTCMilliseconds();
 
-       $scope.min = ($scope.min > 9 ? $scope.min : "0" + $scope.min);
-       $scope.sec = ($scope.sec > 9 ? $scope.sec : "0" + $scope.sec);
-       $scope.ms = ($scope.ms > 99 ? $scope.ms : $scope.ms > 9 ? "0" + $scope.ms : "00" + $scope.ms);
-       $scope.curRecord = Number($scope.min)*60 + Number($scope.sec) + Number($scope.ms/1000);
+    $scope.min = ($scope.min > 9 ? $scope.min : "0" + $scope.min);
+    $scope.sec = ($scope.sec > 9 ? $scope.sec : "0" + $scope.sec);
+    $scope.ms = ($scope.ms > 99 ? $scope.ms : $scope.ms > 9 ? "0" + $scope.ms : "00" + $scope.ms);
+    $scope.curRecord = Number($scope.min)*60 + Number($scope.sec) + Number($scope.ms/1000);
 };
 
 
