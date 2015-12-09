@@ -253,4 +253,36 @@ $scope.submitScore = function(){
 };
 
 
+})
+
+
+
+.controller("ScoreboardCtrl", function($scope, UserService, $firebaseArray, $firebaseAuth){
+
+  $scope.users = [];
+  $scope.scores = [];
+  var ref = new Firebase(firebaseUrl);
+  $scope.users = $firebaseArray(ref.child('users'));
+  $scope.authUID = $firebaseAuth(ref).$getAuth().uid;
+
+  // $scope.users = UserService.getUsers();
+  console.log($scope.users);
+  //need to get the ref in order to get the auth of the current user
+
+  var LEADERBOARD_SIZE = 10;
+  //console.log("in leaderboard");
+  $scope.users.$loaded()
+    .then(function(){
+        angular.forEach($scope.users, function(user) {
+        var userScore = {name: user.displayName, score: user.userPts, avatar: user.profilePic, id: user.$id};
+        $scope.scores.push(userScore);
+      })
+          $scope.scores.sort(function(a,b){return b.score-a.score});
+          $scope.scores = $scope.scores.slice(0, LEADERBOARD_SIZE);
+          // for(i =0; i < $scope.scores.length; i++) {
+          //   console.log($scope.scores[i]);
+          // }
+    });
+
+
 });
