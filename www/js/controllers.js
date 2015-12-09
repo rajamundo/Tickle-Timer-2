@@ -37,7 +37,7 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
                     userPts: 0,
                     record: 0, //time value stored in seconds
                     ranking: "Tickle Tease",
-                    currentGoal: 0
+                    currentGoal: 2
                 });
                 $ionicLoading.hide();
                 $scope.modal.hide();
@@ -81,34 +81,59 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
 
   $scope.getAccountInfo = function() {
 
-    var user = UserService.getUser();
+   var user = UserService.getUser();
    //  var reff = new Firebase(firebaseUrl);
    // var authUID = $firebaseAuth(reff).$getAuth().uid;
    //  var user = $firebaseObject(reff.child('users').child(authUID));
-    user.$ref().on("value", function(snapshot) {
-    $scope.values = snapshot.val()
-    console.log($scope.values);
-  }, function (errorObject) {
-    console.log("The read failed: " + errorObject.code);
-  });
+  
+    //var getSnap = function() {
+      user.$ref().on("value", function(snapshot) {
+      $scope.values = snapshot.val();
+      console.log($scope.values);
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+    //};
 
-  };
-  console.log("in account");
+    //var promise = getSnap();
 
-  $scope.doRefresh = function() {
-    $http.get('/account')
-     .success(function() {
-       
-     })
-     .finally(function() {
-       // Stop the ion-refresher from spinning
-       $scope.$broadcast('scroll.refreshComplete');
-     });
-  };
-  //user.$bindTo($scope, "userdata");
-  //user.$ref().set({ userPts : 4 });
 
-  //console.log(authData.score);
+
+    // console.log("in account");
+
+    // curPts = $scope.values.userPts;
+    // newRanking = "Tickle Tease"
+    //   console.log(curPts);
+    // switch(curPts) {
+    //   case curPts < 100:
+    //     newRanking = "Tickle Tease";
+    //     break;
+    //   case curPts < 200:
+    //     newRanking = "Flacid Fingers";
+    //     break;
+    //   case curPts < 500:
+    //     newRanking = "Tickle Toddler";
+    //     break;
+    //   case curPts < 1000:
+    //     newRanking = "Cruising Speed";
+    //     break;
+    //   case curPts < 5000:
+    //     newRanking = "Feel That Burn";
+    //     break;
+    //   case curPts >= 5000:
+    //     newRanking = "Tickle Tyrant";
+    //     break;
+    //   default:
+    //     newRanking = "Tickle Tease";
+    // }
+    // console.log(newRanking);
+
+    // user2.$ref().update({
+    //   "ranking" : newRanking
+    // });
+
+};
+
 
 })
 
@@ -227,14 +252,16 @@ $scope.submitScore = function(){
   newRecord = Number($scope.min)*60 + Number($scope.sec) + Number($scope.ms/1000);
   console.log(userInfo.record);
   console.log(newRecord);
-  if(newRecord > userInfo.record) {
+  if(newRecord > userInfo.currentGoal) {
     addedValue = 0;
     if (newRecord > 10) addedValue = 10;
     else addedValue = Number($scope.sec);
     newGoal = newRecord + addedValue;
+    newPts = Math.floor((newRecord - userInfo.record))*6 + userInfo.userPts;
     user.$ref().update({
       "record" : newRecord,
-      "currentGoal" : newGoal
+      "currentGoal" : newGoal,
+      "userPts" : newPts
     });
   }
   $scope.clearTimer();
