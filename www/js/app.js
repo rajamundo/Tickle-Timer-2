@@ -94,11 +94,12 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'f
         }
   })
 
-  .state('app.search', {
-    url: '/search',
+  .state('app.stopwatch', {
+    url: '/stopwatch',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/stopwatch.html',
+        controller: 'StopWatchCtrl'
       }
     }
   })

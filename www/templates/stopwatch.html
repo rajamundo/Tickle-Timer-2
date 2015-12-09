@@ -1,0 +1,27 @@
+<ion-modal-view>
+ <ion-view view-title="Tickle Timer">
+    <ion-content class="padding">
+        <div class="list">
+        </div>
+        <div>
+            <h1> Current Goal : {{ goal }} </h1>
+        <div>
+        <div class="list card padding">
+            <button ng-click="startTimer()" class="button button-block">
+                Start Timer
+            </button>
+            <button ng-click="stopTimer()" class="button button-block">
+                Stop Timer
+            </button>
+            <button ng-click="clearTimer()" class="button button-block">
+                Clear Timer
+            </button>
+        </div>
+        <div class ="list card padding">
+            <div>
+                <h4> {{minutes}} : {{seconds}} </h4>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+</ion-modal-view>

@@ -30,17 +30,18 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
                 email: user.email,
                 password: user.password
             }).then(function (userData) {
-                //alert("User created successfully!");
+                alert("User created successfully!");
                 ref.child("users").child(userData.uid).set({
                     email: user.email,
                     displayName: user.displayname,
                     userPts: 0,
-                    ranking: "Tickle Tease"
+                    ranking: "Tickle Tease",
+                    currentGoal: 0
                 });
                 $ionicLoading.hide();
                 $scope.modal.hide();
             }).catch(function (error) {
-                //alert("Error: " + error);
+                alert("Error: " + error);
                 $ionicLoading.hide();
             });
         } else
@@ -92,6 +93,7 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
 })
 
 
+
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
@@ -104,4 +106,44 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
+})
+
+
+// timer functionality below using the scope variables "seconds" and "minutes"
+
+.controller('StopWatchCtrl', function($scope, $interval, UserService){
+  var user = UserService.getUser();
+  user.$ref().on("value", function(snapshot) {
+    userInfo= snapshot.val();
+    $scope.goal = userInfo.currentGoal;
+    console.log(userInfo);
+    console.log($scope.goal);
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
+
+
+  $scope.startTimer = function() {
+    $scope.seconds = 0;
+    $scope.minutes = 0;
+
+    timer = $interval(function() {
+      $scope.seconds += 1;
+      if($scope.seconds % 60 === 0) {
+        $scope.seconds = 0;
+        $scope.minutes += 1;
+      }
+    }, 1000);
+
+  };
+
+  $scope.stopTimer = function() {
+    $interval.cancel(timer);
+  };
+
+  $scope.clearTimer = function() {
+    $scope.seconds = 0;
+    $scope.minutes = 0;
+  };
+
 });
