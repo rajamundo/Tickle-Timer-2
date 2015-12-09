@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ngCordova', 'starter.services'])
 
-.controller('LoginCtrl', function($scope, $state, $ionicModal, $rootScope,$firebaseAuth, $ionicLoading) {
+.controller('LoginCtrl', function($scope, $state, $ionicModal, $rootScope,$firebaseAuth, $ionicLoading, $ionicHistory) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -76,15 +76,34 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
 }
 })
 
-.controller('AccountCtrl', function($scope, $firebaseAuth, UserService) {
-  var user = UserService.getUser();
-  user.$ref().on("value", function(snapshot) {
+.controller('AccountCtrl', function($scope, $firebaseAuth, UserService, $state, $ionicHistory, $firebaseObject) {
+
+  $scope.getAccountInfo = function() {
+
+    var user = UserService.getUser();
+   //  var reff = new Firebase(firebaseUrl);
+   // var authUID = $firebaseAuth(reff).$getAuth().uid;
+   //  var user = $firebaseObject(reff.child('users').child(authUID));
+    user.$ref().on("value", function(snapshot) {
     $scope.values = snapshot.val()
-    console.log($scope.values.userPts);
+    console.log($scope.values);
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
   });
+
+  };
   console.log("in account");
+
+  $scope.doRefresh = function() {
+    $http.get('/account')
+     .success(function() {
+       
+     })
+     .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  };
   //user.$bindTo($scope, "userdata");
   //user.$ref().set({ userPts : 4 });
 
@@ -123,27 +142,78 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
   });
 
 
-  $scope.startTimer = function() {
-    $scope.seconds = 0;
-    $scope.minutes = 0;
+  // $scope.startTimer = function() {
+  //   $scope.seconds = 0;
+  //   $scope.minutes = 0;
+  //   $scope.milli = 0;
 
-    timer = $interval(function() {
-      $scope.seconds += 1;
-      if($scope.seconds % 60 === 0) {
-        $scope.seconds = 0;
-        $scope.minutes += 1;
-      }
-    }, 1000);
+  //   timer = $interval(function() {
+  //     $scope.milli += 10;
+  //     if($scope.milli >= 1000) {
+  //       $scope.seconds += 1;
+  //       $scope.milli = 0;
+  //     }
+  //     if($scope.seconds >= 60) {
+  //       $scope.seconds = 0;
+  //       $scope.minutes += 1;
+  //     }
+  //   }, 10);
 
-  };
+  // };
 
-  $scope.stopTimer = function() {
-    $interval.cancel(timer);
-  };
+  // $scope.stopTimer = function() {
+  //   $interval.cancel(timer);
+  // };
 
-  $scope.clearTimer = function() {
-    $scope.seconds = 0;
-    $scope.minutes = 0;
-  };
+  // $scope.clearTimer = function() {
+  //   $scope.seconds = 0;
+  //   $scope.minutes = 0;
+  //   $scope.milli = 0;
+  // };
+
+  var timeBegan = null
+    , timeStopped = null
+    , stoppedDuration = 0
+    , started = null;
+
+$scope.startTimer = function(){
+    if (timeBegan === null) {
+        timeBegan = new Date();
+    }
+
+    if (timeStopped !== null) {
+        stoppedDuration += (new Date() - timeStopped);
+    }
+    console.log(stoppedDuration);
+
+    started = $interval(clockRunning, 10);  
+};
+
+$scope.stopTimer = function() {
+    timeStopped = new Date();
+    $interval.cancel(started);
+};
+ 
+$scope.clearTimer = function(){
+    clearInterval(started);
+    stoppedDuration = 0;
+    timeBegan = null;
+    timeStopped = null;
+    $scope.min = 0;
+    $scope.sec = 0
+    $scope.ms = 0;
+};
+
+clockRunning = function(){
+    var currentTime = new Date();
+    var timeElapsed = new Date(currentTime - timeBegan - stoppedDuration);
+        $scope.min = timeElapsed.getUTCMinutes();
+        $scope.sec = timeElapsed.getUTCSeconds();
+        $scope.ms = timeElapsed.getUTCMilliseconds();
+
+       $scope.min = ($scope.min > 9 ? $scope.min : "0" + $scope.min);
+       $scope.sec = ($scope.sec > 9 ? $scope.sec : "0" + $scope.sec);
+       $scope.ms = ($scope.ms > 99 ? $scope.ms : $scope.ms > 9 ? "0" + $scope.ms : "00" + $scope.ms);
+};
 
 });

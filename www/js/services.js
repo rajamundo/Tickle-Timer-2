@@ -6,15 +6,18 @@ angular.module('starter.services', ['firebase'])
 	}])
 
 .factory('UserService', function($firebaseArray, $firebaseObject, $firebaseAuth){
- 
-  var ref = new Firebase(firebaseUrl);
-  var authUID = $firebaseAuth(ref).$getAuth().uid;
 
+	var ref = new Firebase(firebaseUrl);
+
+ 
   return {
+
     getUsers: function(){ 
       return $firebaseArray(ref.child('users'));
     },
     getUser: function(){
+      console.log("getting the new user");
+      var authUID = $firebaseAuth(ref).$getAuth().uid;
       return $firebaseObject(ref.child('users').child(authUID));
     }
   }  

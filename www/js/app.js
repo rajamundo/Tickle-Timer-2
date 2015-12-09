@@ -11,7 +11,7 @@ var firebaseUrl = "https://sizzling-heat-1909.firebaseio.com";
 
 angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'firebase', 'ngCordova', 'ngIOS9UIWebViewPatch'])
 
-.run(function($ionicPlatform,$rootScope, $location, Auth, $ionicLoading) {
+.run(function($ionicPlatform,$rootScope, $location, Auth, $ionicLoading, $ionicHistory) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -41,6 +41,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'f
 
   $rootScope.logout = function () {
       console.log("Logging out from the app");
+      $ionicHistory.clearCache();
       $ionicLoading.show({
           template: 'Logging Out...'
       });
@@ -95,6 +96,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'f
   })
 
   .state('app.stopwatch', {
+    cache: false,
     url: '/stopwatch',
     views: {
       'menuContent': {
@@ -105,6 +107,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'f
   })
 
   .state('app.account', {
+      cache: false,
       url: '/account',
       views: {
         'menuContent': {
