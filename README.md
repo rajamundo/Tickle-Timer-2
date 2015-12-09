@@ -1,5 +1,7 @@
-Ionic App Base
+Tickle Timer
 =====================
+
+![tickle-gif](https://cloud.githubusercontent.com/assets/6372203/11672914/7da31d28-9de2-11e5-9d81-9ce07f6f19ad.gif)
 
 A starting project for Ionic that optionally supports using custom SCSS.
 
