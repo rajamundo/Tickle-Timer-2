@@ -1,5 +1,23 @@
 /* Empty. Add your own CSS if you like */
 
+@font-face {
+  font-family: "Segoe";
+  src: url("/fonts/Segoe.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Bebas";
+  src: url("/fonts/Bebas.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{
+	font-family: "Segoe" !important;
+}
+
 .locked {
 	opacity: 0.3;
 }
@@ -10,4 +28,40 @@
 
 .completed {
 	color: green;
+}
+
+.padding {
+	background-color: #151515;
+}
+
+.bar{
+	display:none;
+}
+
+.button{
+	background-color: #da645a ;
+	border-color: #da645a;
+	color:white;
+	width:100%;
+	margin-top:5px;
+}
+
+.button:hover, .button:active{
+	background-color: #c95850 ;
+	border-color: #c95850;
+	color:white;
+}
+
+.button-outlined{
+	background-color: rgb(0,0,0,0) ;
+	border-color: #da645a;
+	color:#da645a;
+	width:100%;
+	margin-top:5px;
+}
+
+.button-outlined:hover, .button-outlined:active{
+	background-color: #c95850 ;
+	border-color: #c95850;
+	color:white;
 }
