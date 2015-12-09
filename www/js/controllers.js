@@ -227,7 +227,7 @@ $scope.submitScore = function(){
       newRanking = "Tickle Tease";
     }
     else if(newPts < 200){
-      newRanking = "Flacid Fingers";
+      newRanking = "Flaccid Fingers";
     }
     else if(newPts < 500){
       newRanking = "Tickle Toddler";
@@ -251,6 +251,11 @@ $scope.submitScore = function(){
       "currentGoal" : newGoal,
       "userPts" : newPts,
       "ranking" : newRanking
+    });
+  }
+  else if(newRecord > userInfo.record) {
+      user.$ref().update({
+      "record" : newRecord,
     });
   }
   $scope.clearTimer();

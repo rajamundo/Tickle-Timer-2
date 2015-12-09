@@ -2,14 +2,14 @@
 
 @font-face {
   font-family: "Segoe";
-  src: url("/fonts/Segoe.ttf") format("truetype");
+  src: url("../lib/ionic/fonts/Segoe.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Bebas";
-  src: url("/fonts/Bebas.ttf") format("truetype");
+  src: url("../lib/ionic/fonts/Bebas.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -34,9 +34,9 @@
 	background-color: #151515;
 }
 
-.bar{
+/*.bar{
 	display:none;
-}
+}*/
 
 .button{
 	background-color: #da645a ;
