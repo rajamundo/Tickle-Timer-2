@@ -42,6 +42,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'f
   $rootScope.logout = function () {
       console.log("Logging out from the app");
       $ionicHistory.clearCache();
+      $ionicHistory.clearHistory();
       $ionicLoading.show({
           template: 'Logging Out...'
       });

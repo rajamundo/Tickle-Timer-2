@@ -37,7 +37,8 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
                     userPts: 0,
                     record: 0, //time value stored in seconds
                     ranking: "Tickle Tease",
-                    currentGoal: 2
+                    currentGoal: 2,
+                    profilePic: 0
                 });
                 $ionicLoading.hide();
                 $scope.modal.hide();
@@ -77,62 +78,48 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
 }
 })
 
-.controller('AccountCtrl', function($scope, $firebaseAuth, UserService, $state, $ionicHistory, $firebaseObject) {
+.controller('AccountCtrl', function($scope, $firebaseAuth, UserService, $state, $ionicHistory, $firebaseObject, $cordovaCamera) {
 
   $scope.getAccountInfo = function() {
 
-   var user = UserService.getUser();
-   //  var reff = new Firebase(firebaseUrl);
-   // var authUID = $firebaseAuth(reff).$getAuth().uid;
-   //  var user = $firebaseObject(reff.child('users').child(authUID));
-  
-    //var getSnap = function() {
+      var user = UserService.getUser();
+      $scope.currentUser = user;
+
       user.$ref().on("value", function(snapshot) {
       $scope.values = snapshot.val();
+      $scope.image = $scope.values.profilePic;
       console.log($scope.values);
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
-    //};
-
-    //var promise = getSnap();
+    
 
 
+  };
 
-    // console.log("in account");
-
-    // curPts = $scope.values.userPts;
-    // newRanking = "Tickle Tease"
-    //   console.log(curPts);
-    // switch(curPts) {
-    //   case curPts < 100:
-    //     newRanking = "Tickle Tease";
-    //     break;
-    //   case curPts < 200:
-    //     newRanking = "Flacid Fingers";
-    //     break;
-    //   case curPts < 500:
-    //     newRanking = "Tickle Toddler";
-    //     break;
-    //   case curPts < 1000:
-    //     newRanking = "Cruising Speed";
-    //     break;
-    //   case curPts < 5000:
-    //     newRanking = "Feel That Burn";
-    //     break;
-    //   case curPts >= 5000:
-    //     newRanking = "Tickle Tyrant";
-    //     break;
-    //   default:
-    //     newRanking = "Tickle Tease";
-    // }
-    // console.log(newRanking);
-
-    // user2.$ref().update({
-    //   "ranking" : newRanking
-    // });
-
-};
+  $scope.uploadImage = function(){
+     var options = {
+            quality : 75,
+            destinationType : Camera.DestinationType.DATA_URL,
+            sourceType : Camera.PictureSourceType.CAMERA,
+            allowEdit : true,
+            encodingType: Camera.EncodingType.JPEG,
+            popoverOptions: CameraPopoverOptions,
+            targetWidth: 500,
+            targetHeight: 500,
+            saveToPhotoAlbum: false
+        };
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+            $scope.image = imageData;
+            $scope.currentUser.$ref().update({
+              "profilePic" : imageData
+            }).then(function() {
+                alert("Image has been uploaded");
+            });
+        }, function(error) {
+            console.error(error);
+        });
+  };
 
 
 })
@@ -165,34 +152,6 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
   });
 
 
-  // $scope.startTimer = function() {
-  //   $scope.seconds = 0;
-  //   $scope.minutes = 0;
-  //   $scope.milli = 0;
-
-  //   timer = $interval(function() {
-  //     $scope.milli += 10;
-  //     if($scope.milli >= 1000) {
-  //       $scope.seconds += 1;
-  //       $scope.milli = 0;
-  //     }
-  //     if($scope.seconds >= 60) {
-  //       $scope.seconds = 0;
-  //       $scope.minutes += 1;
-  //     }
-  //   }, 10);
-
-  // };
-
-  // $scope.stopTimer = function() {
-  //   $interval.cancel(timer);
-  // };
-
-  // $scope.clearTimer = function() {
-  //   $scope.seconds = 0;
-  //   $scope.minutes = 0;
-  //   $scope.milli = 0;
-  // };
 
   var timeBegan = null
     , timeStopped = null

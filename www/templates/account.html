@@ -5,7 +5,8 @@
     on-refresh="doRefresh()">
   </ion-refresher> -->
         <div style="line-height: 250px; background-color: rgb(255, 255, 255); border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; width: 100%; height: auto;">
-            <i style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;" class="icon ion-image"></i>
+           <!--  <i style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;" ng-src="data:image/jpeg;base64,{{image}}"></i> -->
+            <img ng-src="data:image/jpeg;base64,{{image}}" width="100%" />
         </div>
         <div style="" class="list card">
             <div class="item item-divider">User</div>
@@ -17,5 +18,8 @@
             <ion-item style=""> <strong>All-Time Record: </strong> {{values.record}}</ion-item>
             <ion-item style=""><strong> Current Goal: </strong> {{ values.currentGoal }} </ion-item>
         </ion-list>
+        <button ng-click="uploadImage()" class="button button-block icon ion-ios-close">
+                Upload Image
+        </button>
     </ion-content>
 </ion-view>
