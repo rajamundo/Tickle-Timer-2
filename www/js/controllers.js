@@ -257,11 +257,37 @@ $scope.submitScore = function(){
     if (newRecord > 10) addedValue = 10;
     else addedValue = Number($scope.sec);
     newGoal = newRecord + addedValue;
-    newPts = Math.floor((newRecord - userInfo.record))*6 + userInfo.userPts;
+    newPts = Math.floor((newRecord - userInfo.currentGoal))*6 + userInfo.userPts;
+    if(newPts < 0) newPts = 0;
+    console.log(newPts);
+    if(newPts < 100){
+      newRanking = "Tickle Tease";
+    }
+    else if(newPts < 200){
+      newRanking = "Flacid Fingers";
+    }
+    else if(newPts < 500){
+      newRanking = "Tickle Toddler";
+    }
+    else if(newPts < 1000){
+      newRanking = "Cruising Speed";
+    }
+    else if(newPts < 5000){
+      newRanking = "Feel That Burn";
+    }
+    else if(newPts >= 5000){
+      newRanking = "Tickle Tyrant";
+    }
+    else {
+      newRanking = "Tickle Tease";
+    }
+    console.log(newRanking);
+
     user.$ref().update({
       "record" : newRecord,
       "currentGoal" : newGoal,
-      "userPts" : newPts
+      "userPts" : newPts,
+      "ranking" : newRanking
     });
   }
   $scope.clearTimer();
