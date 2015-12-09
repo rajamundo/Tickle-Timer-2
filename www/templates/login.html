@@ -1,7 +1,9 @@
 
+
+
  <ion-modal-view>
  <ion-view view-title="" style="background-color:#151515">
-    <ion-content class="padding" style="">
+    <ion-content class="padding" style="border:none">
         <div class="list">
             <div class="logoText">
                 <img src="img/full-logo.png" class="logo" style="max-width:60%;margin-left:20%">
@@ -9,18 +11,16 @@
         </div>
         <div class="list card padding">
             <label class="item item-input">
-                <span class="input-label">Email</span>
-                <input type="text" ng-model="user.email">
+                <input type="text" ng-model="user.email" placeholder="Email">
             </label>
-            <label class="item item-input">
-                <span class="input-label">Password</span>
-                <input type="password" ng-model="user.pwdForLogin">
+            <label class="item item-input" style="border-bottom:none">
+                <input type="password" ng-model="user.pwdForLogin" placeholder="Password">
             </label>
-            <button ng-click="signIn(user)" class="button" style="background-color:#151515;border-color:white">
-                Log in
+            <button ng-click="signIn(user)" class="button icon ion-ios-person-outline" style="background-color:#151515;border-color:white;margin-top:5px;">
+                 Log in
             </button>
-            <button ng-click="modal.show()" class="button custom-hover">
-                Sign up
+            <button ng-click="modal.show()" class="button icon ion-ios-compose-outline" style="margin-top:5px;">
+                 Sign up
             </button>
         </div>
     </ion-content>

@@ -16,6 +16,31 @@
 
 *{
 	font-family: "Segoe" !important;
+	color:white;
+}
+
+::-webkit-input-placeholder {
+   color: white !important;
+   opacity: .9;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: white !important;
+   opacity: .9;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: white !important;
+   opacity: .9;  
+}
+
+:-ms-input-placeholder {  
+   color: white !important;
+   opacity: .9;  
+}
+
+input{
+	color:white;
 }
 
 .locked {
@@ -34,16 +59,13 @@
 	background-color: #151515;
 }
 
-/*.bar{
-	display:none;
-}*/
 
 .button{
 	background-color: #da645a ;
 	border-color: #da645a;
 	color:white;
 	width:100%;
-	margin-top:5px;
+	margin-top:0px;
 }
 
 .button:hover, .button:active{

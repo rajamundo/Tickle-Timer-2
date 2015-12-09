@@ -13,24 +13,21 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
-      <h1 class="title">Left</h1>
-    </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close href="#/app/account">
+        <ion-item menu-close href="#/app/stopwatch" style="border:none">
+          Timer
+        </ion-item>
+        <ion-item menu-close href="#/app/account" style="border:none">
           Account 
         </ion-item>
-        <ion-item menu-close href="#/app/stopwatch">
-          StopWatch
-        </ion-item>
-        <ion-item menu-close href="#/app/achievements">
+        <ion-item menu-close href="#/app/achievements" style="border:none">
           Achievements
         </ion-item>
-        <ion-item menu-close href="#/app/scoreboard">
+        <ion-item menu-close href="#/app/scoreboard" style="border:none">
           Leaderboard
         </ion-item>
-        <ion-item menu-close ng-click="logout()" href="">
+        <ion-item menu-close ng-click="logout()" href="" style="border:none">
           Logout
         </ion-item>
       </ion-list>

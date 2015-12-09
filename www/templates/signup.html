@@ -5,19 +5,21 @@
     </ion-header-bar>
     <ion-content class="padding">
         <div class="list">
-            <label class="item item-input">
-                <span class="input-label">Email Address</span>
-                <input ng-model="user.email" type="text">
+            <div class="logoText">
+                <img src="img/full-logo.png" class="logo" style="max-width:60%;margin-left:20%">
+            </div>
+        </div>
+        <div class="list card padding">
+            <label class="item item-input" style="border:none">
+                <input ng-model="user.displayname" type="text" placeholder="Name">
             </label>
-            <label class="item item-input">
-                <span class="input-label">Password</span>
-                <input ng-model="user.password" type="password">
+            <label class="item item-input" style="border-left:none;border-right:none;">
+                <input ng-model="user.email" type="text" placeholder="Email">
             </label>
-            <label class="item item-input">
-                <span class="input-label">Display Name</span>
-                <input ng-model="user.displayname" type="text">
+            <label class="item item-input" style="border-left:none;border-right:none;border-bottom:none">
+                <input ng-model="user.password" type="password" placeholder="Password">
             </label>
-            <button class="button button-full button-positive" ng-click="createUser(user)">Create</button>
+            <button class="button icon ion-ios-compose-outline" ng-click="createUser(user)"> Sign up</button>
         </div>
     </ion-content>
 </ion-modal-view>
