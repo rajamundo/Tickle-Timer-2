@@ -4,7 +4,7 @@
         <div class="list">
         </div>
         <div>
-            <h1> Current Goal : {{ goal }} </h1>
+            <h1 ng-class="{'completed' : curRecord >= goal}"> Goal : {{ goal }} seconds </h1>
         <div>
         <div class="list card padding">
             <button ng-click="startTimer()" class="button button-block icon ion-ios-stopwatch">
@@ -21,6 +21,11 @@
             <div>
                 <h4> {{min}} : {{sec}} : {{ms}} </h4>
             </div>
+        </div>
+        <div class ="list card padding">
+            <button ng-click="submitScore()" class="button button-block icon ion-ios-close">
+                Submit Time
+            </button>
         </div>
     </ion-content>
 </ion-view>

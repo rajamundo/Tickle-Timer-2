@@ -35,6 +35,7 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
                     email: user.email,
                     displayName: user.displayname,
                     userPts: 0,
+                    record: 0, //time value stored in seconds
                     ranking: "Tickle Tease",
                     currentGoal: 0
                 });
@@ -66,7 +67,7 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
               // });
           });
           //$ionicLoading.hide();
-          $state.go('app.playlists');
+          $state.go('app.account');
       }).catch(function (error) {
           //alert("Authentication failed:" + error.message);
           $ionicLoading.hide();
@@ -112,19 +113,16 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
 })
 
 
+.controller('AchievementsCtrl', function($scope, UserService) {
+  var user = UserService.getUser();
+  user.$ref().on("value", function(snapshot) {
+    userInfo= snapshot.val();
+    $scope.userInfo = userInfo;
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-})
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
 
@@ -174,34 +172,41 @@ angular.module('starter.controllers', ['ngCordova', 'starter.services'])
   var timeBegan = null
     , timeStopped = null
     , stoppedDuration = 0
-    , started = null;
+    , started = null
+    , pressed = false;
 
 $scope.startTimer = function(){
-    if (timeBegan === null) {
-        timeBegan = new Date();
-    }
+    if(pressed === false){
+      pressed = true;
+      if (timeBegan === null) {
+          timeBegan = new Date();
+      }
 
-    if (timeStopped !== null) {
-        stoppedDuration += (new Date() - timeStopped);
-    }
-    console.log(stoppedDuration);
+      if (timeStopped !== null) {
+          stoppedDuration += (new Date() - timeStopped);
+      }
+      console.log(stoppedDuration);
 
-    started = $interval(clockRunning, 10);  
+      started = $interval(clockRunning, 10);  
+  }
 };
 
 $scope.stopTimer = function() {
     timeStopped = new Date();
     $interval.cancel(started);
+    pressed = false;
 };
  
 $scope.clearTimer = function(){
-    clearInterval(started);
+    $interval.cancel(started);
     stoppedDuration = 0;
     timeBegan = null;
     timeStopped = null;
     $scope.min = 0;
     $scope.sec = 0
     $scope.ms = 0;
+    $scope.curRecord = 0;
+    pressed = false;
 };
 
 clockRunning = function(){
@@ -214,6 +219,26 @@ clockRunning = function(){
        $scope.min = ($scope.min > 9 ? $scope.min : "0" + $scope.min);
        $scope.sec = ($scope.sec > 9 ? $scope.sec : "0" + $scope.sec);
        $scope.ms = ($scope.ms > 99 ? $scope.ms : $scope.ms > 9 ? "0" + $scope.ms : "00" + $scope.ms);
+       $scope.curRecord = Number($scope.min)*60 + Number($scope.sec) + Number($scope.ms/1000);
 };
+
+
+$scope.submitScore = function(){
+  newRecord = Number($scope.min)*60 + Number($scope.sec) + Number($scope.ms/1000);
+  console.log(userInfo.record);
+  console.log(newRecord);
+  if(newRecord > userInfo.record) {
+    addedValue = 0;
+    if (newRecord > 10) addedValue = 10;
+    else addedValue = Number($scope.sec);
+    newGoal = newRecord + addedValue;
+    user.$ref().update({
+      "record" : newRecord,
+      "currentGoal" : newGoal
+    });
+  }
+  $scope.clearTimer();
+};
+
 
 });

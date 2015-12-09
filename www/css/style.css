@@ -1,1 +1,13 @@
 /* Empty. Add your own CSS if you like */
+
+.locked {
+	opacity: 0.3;
+}
+
+.locked-text {
+	color : red;
+}
+
+.completed {
+	color: green;
+}

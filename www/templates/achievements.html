@@ -1,0 +1,63 @@
+<ion-modal-view>
+ <ion-view view-title="Tickle Timer">
+    <ion-content class="padding">
+
+    <div class="list card">
+      <div class="item item-divider">Tickle Tease</div>
+      <div class="item item-body">
+        <div>
+          0 points
+        </div>
+      </div>
+    </div>
+    <div class="list card" ng-class="{'locked' : userInfo.userPts < 100}">
+      <div class="item item-divider">Flacid Fingers</div>
+      <div class="item item-body" ng-class="{'locked-text' : userInfo.userPts < 100}">
+        <div>
+          <b>100</b> points
+        </div>
+      </div>
+    </div>
+    <div class="list card" ng-class="{'locked' : userInfo.userPts < 200}">
+      <div class="item item-divider">Tickle Toddler</div>
+      <div class="item item-body" ng-class="{'locked-text' : userInfo.userPts < 200}">
+        <div>
+          <b>200</b> points
+        </div>
+      </div>
+    </div>    
+    <div class="list card" ng-class="{'locked' : userInfo.userPts < 500}">
+      <div class="item item-divider">Cruising Speed</div>
+      <div class="item item-body" ng-class="{'locked-text' : userInfo.userPts < 500}">
+        <div>
+          <b>500</b> points
+        </div>
+      </div>
+    </div>
+    <div class="list card" ng-class="{'locked' : userInfo.userPts < 1000}">
+      <div class="item item-divider">Feel That Burn</div>
+      <div class="item item-body" ng-class="{'locked-text' : userInfo.userPts < 1000}">
+        <div>
+          <b>1000</b> points
+        </div>
+      </div>
+    </div>
+    <div class="list card" ng-class="{'locked' : userInfo.userPts < 5000}">
+      <div class="item item-divider">Tickle Tyrant</div>
+      <div class="item item-body" ng-class="{'locked-text' : userInfo.userPts < 5000}">
+        <div>
+          <b>5000</b> points
+        </div>
+      </div>
+    </div>
+    <div class="list card locked">
+      <div class="item item-divider">Tickle Torture</div>
+      <div class="item item-body locked-text">
+        <div>
+          <b>Impossible</b>
+        </div>
+      </div>
+    </div>
+    </ion-content>
+</ion-view>
+</ion-modal-view>

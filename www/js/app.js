@@ -116,12 +116,13 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'f
         }
       }
     })
-    .state('app.playlists', {
-      url: '/playlists',
+    .state('app.achievements', {
+      cache: false,
+      url: '/achievements',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
+          templateUrl: 'templates/achievements.html',
+          controller: 'AchievementsCtrl'
         }
       }
     })
