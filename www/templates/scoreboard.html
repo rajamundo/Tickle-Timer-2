@@ -1,0 +1,18 @@
+<ion-modal-view>
+	 <ion-view view-title="LeaderBoard">
+	 <ion-content class="padding">
+
+	 	<div class="list">
+		 	<ion-item ng-repeat="winner in scores">
+			 	<div class="item item-avatar" href="#">
+			      <img ng-src="data:image/jpeg;base64,{{winner.avatar}}" width="100%" />
+			      <h2><b>{{winner.position}} </b></h2>
+			      <h2> {{winner.name}} </h2>
+			      <h2> {{winner.score}} </h2>
+			      <div ng-class="{'icon ion-flag' : authUID === winner.id}"></div>
+			    </div>
+			</ion-item>
+	 	</div>
+	 </ion-content>
+	</ion-view>
+</ion-modal-view>

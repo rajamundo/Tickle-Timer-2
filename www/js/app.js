@@ -128,12 +128,13 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'f
       }
     })
 
-  .state('app.single', {
-    url: '/playlists/:playlistId',
+  .state('app.scoreboard', {
+    cache: false,
+    url: '/scoreboard',
     views: {
       'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
+        templateUrl: 'templates/scoreboard.html',
+        controller: 'ScoreboardCtrl'
       }
     }
   });
